@@ -1,0 +1,4 @@
+dn: cn=GROUPNAME,ou=Groups,SERVER
+changetype: modify
+add: member
+member: uid=FIRSTNAME.LASTNAME,ou=Users,SERVER

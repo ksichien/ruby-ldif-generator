@@ -1,0 +1,9 @@
+dn: uid=FIRSTNAME.LASTNAME,ou=Users,SERVER
+objectClass: inetOrgPerson
+uid: FIRSTNAME.LASTNAME
+cn: FIRSTNAME LASTNAME
+displayName: FIRSTCPT LASTCPT
+givenName: FIRSTCPT
+sn: LASTCPT
+mail: FIRSTNAME.LASTNAME@EMAIL
+userPassword: PASSWORD

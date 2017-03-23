@@ -1,0 +1,24 @@
+dn: uid=john.doe,ou=Users,dc=example,dc=com
+objectClass: inetOrgPerson
+uid: john.doe
+cn: john doe
+displayName: John Doe
+givenName: John
+sn: Doe
+mail: john.doe@example.com
+userPassword: $6$mx1z9bpy$hYNppAGvomP6hLXNPnsZG4IPw/8IQh6h7WwPCSUmJoOtHh8cYU6giuPzKC60ODFh8Q8XRqWZAlyUqWN2Za0a6.
+
+dn: cn=Finance,ou=Managers,ou=Germany,ou=Groups,dc=example,dc=com
+changetype: modify
+add: member
+member: uid=john.doe,ou=Users,dc=example,dc=com
+
+dn: cn=Finance,ou=Germany,ou=Groups,dc=example,dc=com
+changetype: modify
+add: member
+member: uid=john.doe,ou=Users,dc=example,dc=com
+
+dn: cn=Finance,ou=Groups,dc=example,dc=com
+changetype: modify
+add: member
+member: uid=john.doe,ou=Users,dc=example,dc=com
