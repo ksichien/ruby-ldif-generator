@@ -9,7 +9,7 @@ It can be executed from a terminal with:
 $ ruby ruby-ldif-generator john smith groups.txt
 ```
 
-The arguments are as follows:
+The available arguments are listed below:
 - the user's first name
 - the user's last name
 - (optional) a text file containing all groups the user will be added to after creation
