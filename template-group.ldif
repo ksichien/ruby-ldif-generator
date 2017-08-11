@@ -1,4 +1,4 @@
-dn: cn=GROUPNAME,ou=Groups,SERVER
+dn: cn=GROUPNAME,ou=groups,SERVER
 changetype: modify
 add: member
-member: uid=FIRSTNAME.LASTNAME,ou=Users,SERVER
+member: uid=FIRSTNAME.LASTNAME,ou=users,SERVER
