@@ -1,11 +1,17 @@
 # ruby-ldif-generator
 
-This is a script I wrote for generating LDIF files to create new users on an OpenLDAP server.
+This is a script for generating LDIF files to create new users on an OpenLDAP server.
 
-The LDIF files are created based from template files included in this project and the result of running the script will be written into the result.ldif file.
+It was part of a gradual process to simplify OpenLDAP user creation, the next step can be found in my ruby-ldap-script project.
 
 It can be executed from a terminal with:
 ```
 $ ruby ruby-ldif-generator john smith groups.txt
 ```
-Where the first argument is the new user's first name, the second argument their last name and the third (optional) argument a text file with all groups the new user needs to be added to.
+
+The arguments are as follows:
+- the user's first name
+- the user's last name
+- (optional) a text file containing all groups the user will be added to after creation
+
+When the script is executed, it will write all operations to result.ldif and print the username and password to the terminal.
