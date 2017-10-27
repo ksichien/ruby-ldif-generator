@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 require 'securerandom'
 
-USERTEMPLATE = "template-user.ldif"
-GROUPTEMPLATE = "template-group.ldif"
-RESULT = "result.ldif"
-SERVER = "dc=example,dc=com"
-EMAIL = "example.com"
+USERTEMPLATE = 'template-user.ldif'
+GROUPTEMPLATE = 'template-group.ldif'
+RESULT = 'result.ldif'
+SERVER = 'dc=internal,dc=vandelayindustries,dc=com'
+EMAIL = 'vandelayindustries.com'
 
 def genpwd
   pwd = SecureRandom.urlsafe_base64(24)
@@ -20,13 +20,13 @@ if File.exists?(USERTEMPLATE)
   resultfile = File.open(RESULT, 'w')
   templatearray = File.open(USERTEMPLATE, 'r') { |templates| templates.readlines}
   templatearray.each do |t|
-    t.gsub!("SERVER", SERVER)
-    t.gsub!("FIRSTNAME", ARGV[0])
-    t.gsub!("LASTNAME", ARGV[1])
-    t.gsub!("FIRSTCPT", ARGV[0].capitalize)
-    t.gsub!("LASTCPT", ARGV[1].capitalize)
-    t.gsub!("PASSWORD", pwd[1])
-    t.gsub!("EMAIL", EMAIL)
+    t.gsub!('SERVER', SERVER)
+    t.gsub!('FIRSTNAME', ARGV[0])
+    t.gsub!('LASTNAME', ARGV[1])
+    t.gsub!('FIRSTCPT', ARGV[0].capitalize)
+    t.gsub!('LASTCPT', ARGV[1].capitalize)
+    t.gsub!('PASSWORD', pwd[1])
+    t.gsub!('EMAIL', EMAIL)
     resultfile << t
   end
   resultfile.close
@@ -36,7 +36,7 @@ if File.exists?(USERTEMPLATE)
   puts "Hashed Password: #{pwd[1]}"
 
 else
-  puts "No user template found, exiting."
+  puts 'No user template found, exiting.'
 end
 
 unless ARGV[2].nil?
@@ -47,8 +47,8 @@ unless ARGV[2].nil?
     resultfile << "\n"
     templatearray = File.open(GROUPTEMPLATE, 'r') { |templates| templates.readlines }
     templatearray.each do |t|
-      path = ""
-      ldapgroups = g.split(",")
+      path = ''
+      ldapgroups = g.split(',')
       if ldapgroups[1].nil?
         path = ldapgroups[0].chomp
       else
@@ -58,10 +58,10 @@ unless ARGV[2].nil?
           path << ",ou=#{l.chomp}"
         end
       end
-      t.gsub!("GROUPNAME",path.to_s)
-      t.gsub!("SERVER", SERVER)
-      t.gsub!("FIRSTNAME", ARGV[0])
-      t.gsub!("LASTNAME", ARGV[1])
+      t.gsub!('GROUPNAME',path.to_s)
+      t.gsub!('SERVER', SERVER)
+      t.gsub!('FIRSTNAME', ARGV[0])
+      t.gsub!('LASTNAME', ARGV[1])
       resultfile << t
     end
     resultfile.close
