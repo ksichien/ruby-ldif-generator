@@ -1,24 +1,29 @@
 #!/usr/bin/env ruby
 require 'securerandom'
 
-USERTEMPLATE = 'template-user.ldif'
-GROUPTEMPLATE = 'template-group.ldif'
-RESULT = 'result.ldif'
-SERVER = 'dc=internal,dc=vandelayindustries,dc=com'
-EMAIL = 'vandelayindustries.com'
+USERTEMPLATE = 'template-user.ldif'.freeze
+GROUPTEMPLATE = 'template-group.ldif'.freeze
+RESULT = 'result.ldif'.freeze
+SERVER = 'dc=internal,dc=vandelayindustries,dc=com'.freeze
+EMAIL = 'vandelayindustries.com'.freeze
+
+if ARGV[0].nil? || ARGV[1].nil?
+  puts 'Insufficient amount of arguments provided,
+        please consult the README.md file for further instructions.'
+  exit
+end
 
 def genpwd
   pwd = SecureRandom.urlsafe_base64(24)
-  hashpwd = pwd.crypt('$6$' + SecureRandom.random_number(36 ** 8).to_s(36))
-  pwdarray = [pwd, hashpwd]
-  return pwdarray
+  hashpwd = pwd.crypt('$6$' + SecureRandom.random_number(36**8).to_s(36))
+  [pwd, hashpwd]
 end
 
 pwd = genpwd
 
-if File.exists?(USERTEMPLATE)
+if File.exist?(USERTEMPLATE)
   resultfile = File.open(RESULT, 'w')
-  templatearray = File.open(USERTEMPLATE, 'r') { |templates| templates.readlines}
+  templatearray = File.readlines(USERTEMPLATE)
   templatearray.each do |t|
     t.gsub!('SERVER', SERVER)
     t.gsub!('FIRSTNAME', ARGV[0])
@@ -40,12 +45,12 @@ else
 end
 
 unless ARGV[2].nil?
-  grouparray = File.open(ARGV[2], 'r') { |groups| groups.readlines }
+  grouparray = File.readlines(ARGV[2])
   grouparray.each do |g|
     resultfile = File.open(RESULT, 'r+')
     resultfile.read # go to end of file
     resultfile << "\n"
-    templatearray = File.open(GROUPTEMPLATE, 'r') { |templates| templates.readlines }
+    templatearray = File.readlines(GROUPTEMPLATE)
     templatearray.each do |t|
       path = ''
       ldapgroups = g.split(',')
