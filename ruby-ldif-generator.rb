@@ -22,24 +22,25 @@ end
 pwd = genpwd
 
 if File.exist?(USERTEMPLATE)
+  replacements = { 'SERVER': SERVER,
+                   'FIRSTNAME': ARGV[0],
+                   'LASTNAME': ARGV[1],
+                   'FIRSTCPT': ARGV[0].capitalize,
+                   'LASTCPT': ARGV[1].capitalize,
+                   'PASSWORD': pwd[1],
+                   'EMAIL': EMAIL }
   resultfile = File.open(RESULT, 'w')
   templatearray = File.readlines(USERTEMPLATE)
   templatearray.each do |t|
-    t.gsub!('SERVER', SERVER)
-    t.gsub!('FIRSTNAME', ARGV[0])
-    t.gsub!('LASTNAME', ARGV[1])
-    t.gsub!('FIRSTCPT', ARGV[0].capitalize)
-    t.gsub!('LASTCPT', ARGV[1].capitalize)
-    t.gsub!('PASSWORD', pwd[1])
-    t.gsub!('EMAIL', EMAIL)
+    replacements.each do |key,value|
+      t.gsub!("#{key}", "#{value}")
+    end
     resultfile << t
   end
   resultfile.close
-
   puts "Username: #{ARGV[0]}.#{ARGV[1]}"
   puts "Password: #{pwd[0]}"
   puts "Hashed Password: #{pwd[1]}"
-
 else
   puts 'No user template found, exiting.'
 end
@@ -63,10 +64,13 @@ unless ARGV[2].nil?
           path << ",ou=#{l.chomp}"
         end
       end
-      t.gsub!('GROUPNAME',path.to_s)
-      t.gsub!('SERVER', SERVER)
-      t.gsub!('FIRSTNAME', ARGV[0])
-      t.gsub!('LASTNAME', ARGV[1])
+      replacements = { 'GROUPNAME': path.to_s,
+                       'SERVER': SERVER,
+                       'FIRSTNAME': ARGV[0],
+                       'LASTNAME': ARGV[1] }
+      replacements.each do |key,value|
+        t.gsub!("#{key}", "#{value}")
+      end
       resultfile << t
     end
     resultfile.close

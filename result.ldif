@@ -1,22 +1,22 @@
-dn: uid=john.smith,ou=users,dc=example,dc=com
+dn: uid=john.smith,ou=users,dc=internal,dc=vandelayindustries,dc=com
 objectClass: inetOrgPerson
 uid: john.smith
 cn: John Smith
 sn: Smith
-mail: john.smith@example.com
-userPassword: $6$twg462es$VFlxReoQjoHgRuswwmlk6.mMrA0u87xHkOblBEwbIdTFVr3k37Wdd/R7..achY07OE/ow55NCEmy9IGxK1I/C1
+mail: john.smith@vandelayindustries.com
+userPassword: $6$5aoiv8nw$DuljyCpnJIRtVqGtHdnVfOtyhq0G6yrIB8DUSZK9VhixihFi.Jf9Ze2TCjUAQGbX2mmyxoSmq8EaJxTvMcEa5.
 
-dn: cn=Finance,ou=Managers,ou=Germany,ou=groups,dc=example,dc=com
+dn: cn=Finance,ou=Managers,ou=Germany,ou=groups,dc=internal,dc=vandelayindustries,dc=com
 changetype: modify
 add: member
-member: uid=john.smith,ou=users,dc=example,dc=com
+member: uid=john.smith,ou=users,dc=internal,dc=vandelayindustries,dc=com
 
-dn: cn=Finance,ou=Germany,ou=groups,dc=example,dc=com
+dn: cn=Finance,ou=Germany,ou=groups,dc=internal,dc=vandelayindustries,dc=com
 changetype: modify
 add: member
-member: uid=john.smith,ou=users,dc=example,dc=com
+member: uid=john.smith,ou=users,dc=internal,dc=vandelayindustries,dc=com
 
-dn: cn=Finance,ou=groups,dc=example,dc=com
+dn: cn=Finance,ou=groups,dc=internal,dc=vandelayindustries,dc=com
 changetype: modify
 add: member
-member: uid=john.smith,ou=users,dc=example,dc=com
+member: uid=john.smith,ou=users,dc=internal,dc=vandelayindustries,dc=com
